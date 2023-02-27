@@ -84,16 +84,17 @@ def home():
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+
         username = request.form['username']
         password = request.form['password']
         # if the entered credentials are valid admin or student login then redirect to home page
         if username in users and users[username] == password:
+
             session['username'] = username
             return redirect(url_for('home'))
         # otherwise keep on login page
         else:
-            error = 'Invalid username or password'
-            return render_template('login.html', error=error)
+            return render_template('login.html')
     else:
         return render_template('login.html')
 
@@ -137,7 +138,7 @@ def extensionRequests():
 
             module_name = request.form['module_name']
 
-            # updates the record data
+            # updates the record data in the dictionary dataset
             
             extension_requests_data[module_name] = [num_of_requests, num_of_requests_approved, reason_of_request]
         
